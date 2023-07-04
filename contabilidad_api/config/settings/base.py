@@ -44,7 +44,9 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # DATABASES
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
-DATABASES = {"default": env.db("DATABASE_URL")}
+DATABASES = {
+    "default": env.db("DATABASE_URL", default="postgres://postgrest:x017tMq2MJGbh4gJXQKXJQabvPx5VNW7@dpg-cihqt2dgkuvojjaivtn0-a.oregon-postgres.render.com/contabilidadapi"),
+    }
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
@@ -59,6 +61,8 @@ WSGI_APPLICATION = "config.wsgi.application"
 # APPS
 # ------------------------------------------------------------------------------
 DJANGO_APPS = [
+    'admin_interface',
+    'colorfield',
     "django.contrib.auth",
     "django.contrib.contenttypes",
     "django.contrib.sessions",
@@ -83,6 +87,7 @@ THIRD_PARTY_APPS = [
 
 LOCAL_APPS = [
     "contabilidad_api.users",
+    "contabilidad_dev"
     # Your stuff: custom apps go here
 ]
 # https://docs.djangoproject.com/en/dev/ref/settings/#installed-apps
