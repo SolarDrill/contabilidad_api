@@ -48,6 +48,7 @@ psycopg2-binary = "*"
 django-admin-interface = "*"
 environ = "*"
 gunicorn = "*"
+sentry-sdk = "*"
 
 [dev-packages]
 
