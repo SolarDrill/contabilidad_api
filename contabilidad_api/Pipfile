@@ -49,6 +49,7 @@ django-admin-interface = "*"
 environ = "*"
 gunicorn = "*"
 sentry-sdk = "*"
+collectfast = "*"
 
 [dev-packages]
 
