@@ -1,4 +1,4 @@
-[[source]]
+T[[source]]
 url = "https://pypi.org/simple"
 verify_ssl = true
 name = "pypi"
@@ -47,6 +47,8 @@ pytest-django = "==4.5.2"
 psycopg2-binary = "*"
 django-admin-interface = "*"
 environ = "*"
+vercel = "*"
+gunicorn = "*"
 
 [dev-packages]
 
