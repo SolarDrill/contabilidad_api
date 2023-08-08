@@ -1,5 +1,5 @@
 #INstall Dependencies
-pip install -r build.sh
+pip install -r requirements.txt
 # Run the application
 
 #Run MIGRATIONS
