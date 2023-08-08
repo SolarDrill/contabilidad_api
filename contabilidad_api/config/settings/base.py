@@ -45,8 +45,8 @@ LOCALE_PATHS = [str(BASE_DIR / "locale")]
 # ------------------------------------------------------------------------------
 # https://docs.djangoproject.com/en/dev/ref/settings/#databases
 DATABASES = {
-    "default": env.db("DATABASE_URL", default="postgres://postgrest:x017tMq2MJGbh4gJXQKXJQabvPx5VNW7@dpg-cihqt2dgkuvojjaivtn0-a.oregon-postgres.render.com/contabilidadapi"),
-    }
+    "default": env.db("DATABASE_URL", default="sqlite:///db.sqlite3"),
+}
 DATABASES["default"]["ATOMIC_REQUESTS"] = True
 # https://docs.djangoproject.com/en/stable/ref/settings/#std:setting-DEFAULT_AUTO_FIELD
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

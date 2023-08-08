@@ -46,6 +46,7 @@ django-coverage-plugin = "==3.0.0"
 pytest-django = "==4.5.2"
 psycopg2-binary = "*"
 django-admin-interface = "*"
+environ = "*"
 
 [dev-packages]
 
