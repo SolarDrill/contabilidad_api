@@ -1,0 +1,79 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<style>
+  .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+  }
+
+  .form-container h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+
+  .form-container form {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .form-container label {
+      margin-bottom: 5px;
+      font-weight: bold;
+  }
+
+  .form-container input,
+  .form-container select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+  }
+
+  .form-container button {
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+  }
+
+  .form-container button:hover {
+      background-color: #45a049;
+  }
+
+  .back-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #333;
+  }
+  .update-form {
+        margin-top: 20px;
+    }
+</style>
+<div class="form-container">
+  <h1>Update Item</h1>
+  <form method="post">
+      {% csrf_token %}
+      <label for="{{ form.name.id_for_label }}">Item Name:</label>
+      {{ form.name }}
+      <label for="{{ form.description.id_for_label }}">Description:</label>
+      {{ form.description }}
+      <label for="{{ form.existence.id_for_label }}">Existence:</label>
+      {{ form.existence }}
+      <label for="{{ form.brand.id_for_label }}">Brand:</label>
+      {{ form.brand }}
+      <label for="{{ form.unit_of_measurement.id_for_label }}">Unit of Measurement:</label>
+      {{ form.unit_of_measurement }}
+      <button type="submit" class="btn btn-primary">Update Item</button>
+  </form>
+  <a href="{% url 'item_list' %}" class="back-link">Back to Item List</a>
+</div>
+{% endblock %}

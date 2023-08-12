@@ -1,0 +1,146 @@
+{% load static i18n %}
+
+{% block css %}
+  <!-- Latest compiled and minified Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.3/css/bootstrap.min.css"
+        integrity="sha512-SbiR/eusphKoMVVXysTKG/7VseWii+Y3FdHrt0EpKgpToZeemhqHeZeLWLhJutz/2ut2Vw1uQEj2MbRF+TVBUA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- Your project-specific CSS -->
+  <link href="{% static 'styles.css' %}" rel="stylesheet" />
+  <style>
+    /* Additional styles for the dashboard */
+    .dashboard-container {
+        margin-top: 20px;
+    }
+
+    .card {
+        border: none;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .card-title {
+        font-size: 18px;
+        margin-bottom: 10px;
+    }
+
+    .btn-block {
+        margin-top: 10px;
+    }
+
+    .btn-block:hover {
+        opacity: 0.8;
+    }
+  </style>
+{% endblock css %}
+
+{% block content %}
+<div class="mb-1">
+  <nav class="navbar navbar-expand-md navbar-light bg-light">
+    <div class="container-fluid">
+      <button class="navbar-toggler navbar-toggler-right"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarSupportedContent"
+              aria-controls="navbarSupportedContent"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <a class="navbar-brand" href="{% url 'main_page' %}">Contabilidad</a>
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          {% if request.user.is_authenticated %}
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'users:detail' request.user.username %}">{% translate "My Profile" %}</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'account_logout' %}">{% translate "Sign Out" %}</a>
+            </li>
+          {% else %}
+            {% if ACCOUNT_ALLOW_REGISTRATION %}
+              <li class="nav-item">
+                <a id="sign-up-link" class="nav-link" href="{% url 'account_signup' %}">{% translate "Sign Up" %}</a>
+              </li>
+            {% endif %}
+            <li class="nav-item">
+              <a id="log-in-link" class="nav-link" href="{% url 'account_login' %}">{% translate "Sign In" %}</a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+<div class="container">
+  {% if messages %}
+    {% for message in messages %}
+      <div class="alert alert-dismissible {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+        {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  {% block dashboard %}
+  <div class="row dashboard-container">
+    <div class="col-md-3">
+      <!-- Department Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Departments</h5>
+          <p class="card-text">Manage and organize your departments.</p>
+          <a href="{% url 'department_list' %}" class="btn btn-primary btn-block">View List</a>
+          <a href="{% url 'department_create' %}" class="btn btn-success btn-block">Add Department</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- Units of Measurement Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Units of Measurement</h5>
+          <p class="card-text">Manage measurement units for your items.</p>
+          <a href="{% url 'unit_list' %}" class="btn btn-primary btn-block">View List</a>
+          <a href="{% url 'unit_create' %}" class="btn btn-success btn-block">Add Unit</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- Items Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Items</h5>
+          <p class="card-text">Track and manage your inventory items.</p>
+          <a href="{% url 'item_list' %}" class="btn btn-primary btn-block">View List</a>
+          <a href="{% url 'item_create' %}" class="btn btn-success btn-block">Add Item</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- Suppliers Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Suppliers</h5>
+          <p class="card-text">Manage your suppliers.</p>
+          <a href="{% url 'supplier_list' %}" class="btn btn-primary btn-block">View List</a>
+          <a href="{% url 'supplier_create' %}" class="btn btn-success btn-block">Add Supplier</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-3">
+      <!-- Entries Card -->
+      <div class="card mb-3">
+        <div class="card-body">
+          <h5 class="card-title">Entries</h5>
+          <p class="card-text">Create your Entries.</p>
+          <a href="{% url 'send_accounting_data' %}" class="btn btn-success btn-block">Add Entry</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cool-design">
+    <p>Streamline your business operations, keep track of your inventory, manage suppliers, and more with Contabilidad Module.</p>
+  </div>
+  {% endblock dashboard %}
+</div>
+{% endblock content %}

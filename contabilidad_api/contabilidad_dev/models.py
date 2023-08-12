@@ -47,3 +47,17 @@ class Supplier(CommonInfo):
 
     def __str__(self):
         return self.business_name
+
+class AccountingEntry(models.Model):
+    descripcion = models.TextField()
+    auxiliar = models.IntegerField()
+    monto = models.IntegerField()
+    cuentaCR = models.IntegerField()
+    cuentaDB = models.IntegerField()
+
+    class Meta:
+        verbose_name = 'Accounting entry'
+        verbose_name_plural = 'Accounting entries'
+
+    def __str__(self):
+        return self.descripcion

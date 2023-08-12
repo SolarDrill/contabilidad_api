@@ -1,0 +1,75 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<style>
+  .form-container {
+      max-width: 400px;
+      margin: 0 auto;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+  }
+
+  .form-container h1 {
+      font-size: 24px;
+      margin-bottom: 20px;
+  }
+
+  .form-container form {
+      display: flex;
+      flex-direction: column;
+  }
+
+  .form-container label {
+      margin-bottom: 5px;
+      font-weight: bold;
+  }
+
+  .form-container input,
+  .form-container select {
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+  }
+
+  .form-container button {
+      padding: 10px;
+      background-color: #4caf50;
+      color: white;
+      border: none;
+      border-radius: 3px;
+      cursor: pointer;
+  }
+
+  .form-container button:hover {
+      background-color: #45a049;
+  }
+
+  .back-link {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #333;
+  }
+
+  /* Add the update-form class styling */
+  .update-form {
+        margin-top: 20px;
+  }
+</style>
+<div class="form-container update-form">
+  <h1>Update Unit of Measurement</h1>
+  <form method="post">
+      {% csrf_token %}
+      <label for="{{ form.name.id_for_label }}">Unit Name:</label>
+      {{ form.name }}
+      <label for="{{ form.description.id_for_label }}">Description:</label>
+      {{ form.description }}
+      <button type="submit" class="btn btn-primary">Update Unit of Measurement</button>
+  </form>
+  <a href="{% url 'unit_list' %}" class="back-link">Back to Unit List</a>
+</div>
+{% endblock %}

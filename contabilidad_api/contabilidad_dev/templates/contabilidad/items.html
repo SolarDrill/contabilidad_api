@@ -1,0 +1,39 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<h1>Items</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Existence</th>
+            <th>Brand</th>
+            <th>Unit of Measurement</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.name }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.existence }}</td>
+            <td>{{ item.brand }}</td>
+            <td>{{ item.unit_of_measurement }}</td>
+            <td>
+                <a href="{% url 'item_update' item.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <form method="post" action="{% url 'item_delete' item.pk %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this item?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'item_create' %}" class="btn btn-success">Add Item</a>
+
+{% endblock %}

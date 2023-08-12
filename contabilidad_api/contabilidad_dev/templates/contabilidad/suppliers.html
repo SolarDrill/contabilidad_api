@@ -1,0 +1,33 @@
+{% extends '../base.html' %}
+
+{% block content %}
+<h1>Suppliers</h1>
+
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th>Legal Document</th>
+            <th>Business Name</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for supplier in suppliers %}
+        <tr>
+            <td>{{ supplier.legal_document }}</td>
+            <td>{{ supplier.business_name }}</td>
+            <td>
+                <a href="{% url 'supplier_update' supplier.pk %}" class="btn btn-warning btn-sm">Edit</a>
+                <form method="post" action="{% url 'supplier_delete' supplier.pk %}" class="d-inline">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this supplier?')">Delete</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<a href="{% url 'supplier_create' %}" class="btn btn-success">Add Supplier</a>
+
+{% endblock %}
